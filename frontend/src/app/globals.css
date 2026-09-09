@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Neobrutalism Colors */
+  --color-brutal-yellow: #FFE600;
+  --color-brutal-cyan: #00F0FF;
+  --color-brutal-pink: #FF00E6;
+  --color-brutal-green: #00FF55;
+  --color-brutal-orange: #FF5E00;
+  --color-brutal-purple: #8B5CF6;
+  --color-brutal-blue: #3B82F6;
+  --color-brutal-red: #EF4444;
+}
+
+body {
+  background-color: #f8f9fa; /* Very light clean background */
+  color: #000;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  /* Light square grid pattern */
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.brutal-grid {
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Neobrutalism Utilities */
+.brutal-border {
+  border: 4px solid #000;
+}
+
+.brutal-shadow {
+  box-shadow: 8px 8px 0px 0px #000;
+  transition: all 0.15s ease-in-out;
+}
+
+.brutal-shadow:hover {
+  transform: translate(4px, 4px);
+  box-shadow: 4px 4px 0px 0px #000;
+}
+
+.brutal-shadow:active {
+  transform: translate(8px, 8px);
+  box-shadow: 0px 0px 0px 0px #000;
+}
+
+.brutal-shadow-sm {
+  box-shadow: 4px 4px 0px 0px #000;
+  transition: all 0.15s ease-in-out;
+}
+
+.brutal-shadow-sm:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+.brutal-shadow-sm:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px 0px #000;
+}
+
+.brutal-card {
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 0px;
+}
+
+.brutal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 4px solid #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
