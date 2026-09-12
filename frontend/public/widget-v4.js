@@ -99,7 +99,7 @@ Please report this to https://github.com/markedjs/marked.`,e){let e=`<p>An error
             </button>
           </form>
           <div class="footer-branding">
-            ⚡ Powered by ConvoAI
+            ⚡ Powered by <a href="https://botconvoai.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">ConvoAI</a>
           </div>
         </div>
       </div>
