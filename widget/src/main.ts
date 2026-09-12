@@ -10,7 +10,7 @@ class ChatWidget {
   private isOpen: boolean = false;
   private isTyping: boolean = false;
   private sessionId: string;
-  private apiUrl: string = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+  private apiUrl: string = '';
   
   // DOM Elements
   private chatWindow!: HTMLDivElement;
@@ -32,6 +32,7 @@ class ChatWidget {
     }
     this.siteId = currentScript.getAttribute('data-site-id') || 'unknown';
     this.token = currentScript.getAttribute('data-token') || '';
+    this.apiUrl = currentScript.getAttribute('data-api-url') || import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
     
     // Generate a simple session ID for the user
     this.sessionId = Math.random().toString(36).substring(2, 15);

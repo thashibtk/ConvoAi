@@ -223,7 +223,8 @@ export default function SiteDetail({ params }: { params: Promise<{ site_id: stri
     }
   };
 
-  const widgetCode = `<script src="http://localhost:5173/widget-v4.js" data-site-id="${site_id}"${currentSite?.widget_token ? ` data-token="${currentSite.widget_token}"` : ''}></script>`;
+  const widgetUrl = process.env.NEXT_PUBLIC_WIDGET_URL || (typeof window !== 'undefined' ? `${window.location.origin}/widget-v4.js` : 'http://localhost:5173/widget-v4.js');
+  const widgetCode = `<script src="${widgetUrl}" data-site-id="${site_id}"${currentSite?.widget_token ? ` data-token="${currentSite.widget_token}"` : ''} data-api-url="${apiUrl}"></script>`;
 
   const copyCode = () => {
     navigator.clipboard.writeText(widgetCode);
