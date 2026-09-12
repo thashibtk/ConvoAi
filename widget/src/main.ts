@@ -134,7 +134,7 @@ class ChatWidget {
             </button>
           </form>
           <div class="footer-branding">
-            ⚡ Powered by ConvoAI
+            ⚡ Powered by <a href="https://botconvoai.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">ConvoAI</a>
           </div>
         </div>
       </div>
