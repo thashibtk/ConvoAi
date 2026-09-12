@@ -1,7 +1,17 @@
 import os
 import numpy as np
-from google import genai
+from sentence_transformers import SentenceTransformer
 from chatbot.models import Chunk
+
+# Lazy load the embedder so it doesn't block Django server startup
+embedder = None
+
+def get_embedder():
+    global embedder
+    if embedder is None:
+        os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
+        embedder = SentenceTransformer('all-MiniLM-L6-v2')
+    return embedder
 
 def cosine_similarity(vec1, vec2):
     v1 = np.array(vec1)
@@ -13,13 +23,7 @@ def cosine_similarity(vec1, vec2):
     return np.dot(v1, v2) / (norm_v1 * norm_v2)
 
 def retrieve_context(site, user_query, top_k=3):
-    client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY', ''))
-    
-    response = client.models.embed_content(
-        model="gemini-embedding-2",
-        contents=user_query,
-    )
-    query_embedding = response.embeddings[0].values
+    query_embedding = get_embedder().encode([user_query])[0]
     
     chunks = Chunk.objects.filter(document__site=site)
     if not chunks.exists():

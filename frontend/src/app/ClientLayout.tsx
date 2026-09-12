@@ -60,11 +60,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           <nav className="sticky top-0 z-50 bg-white border-b-[6px] border-black py-4">
             <div className="w-full px-6 sm:px-12 md:px-16 lg:px-24 flex items-center justify-between">
               {/* Logo */}
-              <div className="h-10 md:h-12 flex items-center">
+              <Link href="/sites" className="h-10 md:h-12 flex items-center">
                 <div className="h-full border-[2px] border-black brutal-shadow-sm overflow-hidden bg-white px-2 flex items-center">
                   <img src="/logo.png" alt="Convoi logo" className="h-full object-contain" />
                 </div>
-              </div>
+              </Link>
 
               {/* Desktop Links */}
               <div className="hidden md:flex items-center gap-6">

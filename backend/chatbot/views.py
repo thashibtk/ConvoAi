@@ -1,5 +1,4 @@
 import os
-from google import genai
 from groq import Groq
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -59,6 +58,10 @@ class DocumentListCreateView(generics.ListCreateAPIView):
         except Exception as e:
             print(f"Error during ingestion: {e}")
 
+class DocumentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Document.objects.all()
+    serializer_class = DocumentSerializer
+
 class ChatAPIView(APIView):
     def post(self, request):
         site_id = request.data.get('site_id')
@@ -111,7 +114,7 @@ class ChatAPIView(APIView):
                 
                 full_text = ""
                 for chunk in stream:
-                    if chunk.choices[0].delta.content:
+                    if hasattr(chunk, 'choices') and chunk.choices and len(chunk.choices) > 0 and chunk.choices[0].delta.content:
                         full_text += chunk.choices[0].delta.content
                         yield chunk.choices[0].delta.content
                 

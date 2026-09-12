@@ -1,6 +1,16 @@
 import os
-from google import genai
+from sentence_transformers import SentenceTransformer
 from chatbot.models import Chunk
+
+# Lazy load the embedder so it doesn't block Django server startup
+embedder = None
+
+def get_embedder():
+    global embedder
+    if embedder is None:
+        os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
+        embedder = SentenceTransformer('all-MiniLM-L6-v2')
+    return embedder
 
 def chunk_text(text, max_length=1000):
     paragraphs = text.split('\n')
@@ -25,22 +35,14 @@ def ingest_document(document):
     if not text_chunks:
         return 0
     
-    client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY', ''))
-    
-    embeddings = []
-    for chunk in text_chunks:
-        response = client.models.embed_content(
-            model="gemini-embedding-2",
-            contents=chunk,
-        )
-        # In the new SDK, the vector is in response.embeddings[0].values
-        embeddings.append(response.embeddings[0].values)
+    # Generate embeddings using sentence-transformers
+    embeddings = get_embedder().encode(text_chunks)
     
     for i, (text, emb) in enumerate(zip(text_chunks, embeddings)):
         Chunk.objects.create(
             document=document,
             text=text,
-            embedding=emb,
+            embedding=emb.tolist(),  # Convert numpy array to list for JSON serialization
             index=i
         )
     return len(text_chunks)

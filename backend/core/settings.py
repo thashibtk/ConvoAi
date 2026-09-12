@@ -9,11 +9,12 @@ SECRET_KEY = 'django-insecure-qf*o_gx-944cp)#o)-04rfa0ly6t(=yaftrgp!sz!3w+-u2p-+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['convoai.boomspace.co', 'localhost', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,9 +115,17 @@ MAILERS = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = []
 
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
+
+# Unfold Admin Settings
+UNFOLD = {
+    "SITE_TITLE": "ConvoAi Admin",
+    "SITE_HEADER": "ConvoAi Admin",
+    "SITE_URL": "/",
+}
